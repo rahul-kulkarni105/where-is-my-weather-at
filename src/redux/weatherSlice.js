@@ -1,12 +1,11 @@
-import axios from 'axios';
+import { requestHandler } from '../Utils/requestHandler'
 import {
   createAsyncThunk,
   createSlice
 } from '@reduxjs/toolkit';
 
 import {
-  WEATHER_API_CONTEXT,
-  COMMON_HEADERS
+  WEATHER_API_CONTEXT
 } from '../Utils/globalConstants'
 
 const initialState = {
@@ -23,12 +22,8 @@ export const getCurrentLocationWeather = createAsyncThunk(
     const baseUrl = `${process.env.REACT_APP_OPEN_WEATHER_MAP_API_BASE_URL}${WEATHER_API_CONTEXT}`
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
     const fullUrl = `${baseUrl}?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
-    // Can create a request handler proxy to create axios instance at one place
-    // and reuse it everywhere it is needed.
     try {
-      const response = await axios.get(fullUrl, {
-        headers: COMMON_HEADERS
-      })
+      const response = await requestHandler({}).get(fullUrl)
       return response.data
     } catch(err) {
       console.log(err, 'error in open weather api')
