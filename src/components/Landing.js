@@ -4,7 +4,9 @@ import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   getCurrentLocationWeather,
+  getWeatherInOneCall,
   getWeatherApiStatus,
+  getAllWeatherApiStatus
 } from '../redux/weatherSlice'
 import {
   getCurrentLocationAddress,
@@ -12,6 +14,7 @@ import {
 } from '../redux/addressSlice'
 
 import { DailyWeather } from './DailyWeather'
+import { WeeklyWeather } from './WeeklyWeather'
 import { Address } from './Address'
 
 export const Landing = () => {
@@ -21,6 +24,7 @@ export const Landing = () => {
   const dispatch = useDispatch()
   const weatherApiStatus = useSelector(getWeatherApiStatus)
   const addressApiStatus = useSelector(getAddressApiStatus)
+  const allWeatherApiStatus = useSelector(getAllWeatherApiStatus)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,9 +43,12 @@ export const Landing = () => {
         if (weatherApiStatus === 'idle') {
           dispatch(getCurrentLocationWeather({ lat, lon }))
         }
+        if (allWeatherApiStatus === 'idle') {
+          dispatch(getWeatherInOneCall({ lat, lon }))
+        }
       })
     }
-  }, [lat, lon, addressApiStatus, weatherApiStatus, dispatch])
+  }, [lat, lon, addressApiStatus, weatherApiStatus, allWeatherApiStatus, dispatch])
 
   return (
     <div className="row landing-wrapper">
@@ -77,7 +84,17 @@ export const Landing = () => {
             <DailyWeather></DailyWeather>
           }
         </Box>
-        <Box className="weekly-weather-wrapper">This is a WIP section for weekly Weather</Box>
+        <Box className="daily-weather-wrapper">
+          {
+            (allWeatherApiStatus === 'idle' || allWeatherApiStatus === 'loading')
+            ?
+            <div className="circular-progress">
+                <CircularProgress/>
+            </div>
+            :
+            <WeeklyWeather></WeeklyWeather>
+          }
+        </Box>
       </Box>
     </div>
   );
