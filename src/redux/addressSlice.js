@@ -26,8 +26,6 @@ export const getCurrentLocationAddress = createAsyncThunk(
         'Content-Type': 'application/json'
       }
     })
-    // TODO: need to remove console.log
-    console.log(response, 'response from open address');
     return response.data
 })
 
@@ -61,6 +59,23 @@ export default addressSlice.reducer;
 
 // state getters
 export const getAddressApiStatus = (state) => state.address.status
+export const getCityAndState = ({
+  address: {
+    address: {
+      results: [{
+        components: {
+          city = 'N/A',
+          state_code = 'N/A'
+        }
+      } = {}] = []
+    }
+  }
+}) => {
+  return {
+    city,
+    state: state_code,
+  }
+}
 export const getStreetAddress = ({
   address: {
     address: {
@@ -70,3 +85,4 @@ export const getStreetAddress = ({
     }
   }
 }) => fullStreetAddress
+

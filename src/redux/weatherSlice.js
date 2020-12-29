@@ -19,7 +19,7 @@ export const getCurrentLocationWeather = createAsyncThunk(
     // baseUrl can also be part of the env config if needed.
     const baseUrl = `${process.env.REACT_APP_OPEN_WEATHER_MAP_API_BASE_URL}${WEATHER_API_CONTEXT}`
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
-    const fullUrl = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    const fullUrl = `${baseUrl}?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     // Can create a request handler proxy to create axios instance at one place
     // and reuse it everywhere it is needed.
     const response = await axios.get(fullUrl, {
@@ -27,8 +27,6 @@ export const getCurrentLocationWeather = createAsyncThunk(
         'Content-Type': 'application/json'
       }
     })
-    // TODO: need to remove console.log
-    console.log(response, 'response from open weather');
     return response.data
 })
 
@@ -63,3 +61,20 @@ export default weatherSlice.reducer;
 // state getters
 export const getWeatherApiStatus = (state) => state.weather.status
 export const selectAllInfo = (state) => state.weather.weather
+export const getWeatherDescription = ({
+  weather: {
+    weather: {
+      weather = []
+    }
+  }
+}) => {
+  const weatherDescription = weather.map(slug => slug.description) || ''
+  return weatherDescription;
+}
+export const getTemperatureInfo = ({
+  weather: {
+    weather: {
+      main = {}
+    }
+  }
+}) => main

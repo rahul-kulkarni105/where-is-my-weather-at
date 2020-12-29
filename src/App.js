@@ -1,6 +1,6 @@
 import React from 'react';
 import { Landing } from './components/Landing'
-import './styles/App.css';
+import './styles/app.css';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         Weather App
       </header>
-      <section className="container">
+      <section className="container App-wrapper">
         <Landing></Landing>
       </section>
     </div>

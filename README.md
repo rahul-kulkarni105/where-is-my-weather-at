@@ -1,3 +1,23 @@
+# Weather App
+
+## How to Run
+
+- Clone the project using
+```
+  git clone https://github.com/rahul-kulkarni105/where-is-my-weather-at.git
+```
+- Once you clone, go to the local repo and check if the directory you are in has package.json then perform
+```
+  npm install
+```
+- After the installation is finished successfully, please create an .env file in your root directory and add the fields sent in the email. These values are needed to call the API's successfully.
+- After above step is completed perform below command and the browser will open automatically displaying the project.
+```
+  npm run start
+```
+--------------------
+> Below Read me is part of create react app redux boilerplate.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts

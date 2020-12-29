@@ -1,0 +1,15 @@
+.address {
+  /* padding: 15px; */
+}
+
+.city-state {
+  border-bottom: 1px solid aqua;
+}
+
+.day-time {
+  padding: 10px 0px;
+}
+
+.address-headers {
+  display: inline-block;
+}
