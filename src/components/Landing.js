@@ -16,11 +16,11 @@ import { Address } from './Address'
 
 export const Landing = () => {
   // defaults for latitude and longitude are my current location details.
-  const [lat, setLatitude] = useState(30.2963825);
-  const [lon, setLongitude] = useState(-97.73907609999999);
+  const [lat, setLatitude] = useState(30.2963825)
+  const [lon, setLongitude] = useState(-97.73907609999999)
   const dispatch = useDispatch()
   const weatherApiStatus = useSelector(getWeatherApiStatus)
-  const addressApiStatus = useSelector(getAddressApiStatus);
+  const addressApiStatus = useSelector(getAddressApiStatus)
 
   useEffect(() => {
     if (navigator.geolocation) {
