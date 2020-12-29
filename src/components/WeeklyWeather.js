@@ -30,8 +30,8 @@ export const WeeklyWeather = () => {
                   return (
                     <div className="weekday" key={`week-day-key${index}`}>
                       <p className="weekday-value">{dayOfTheWeek}</p>
-                      <p className="weekday-value">{maxTemp}</p>
-                      <p className="weekday-value">{minTemp}</p>
+                      <p className="weekday-value">{Math.round(maxTemp)} °F</p>
+                      <p className="weekday-value">{Math.round(minTemp)} °F</p>
                     </div>
                   )
                 })
