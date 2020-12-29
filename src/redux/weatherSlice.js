@@ -126,8 +126,8 @@ export const weeklyWeatherInfo = ({
   const formatDailyWeather = daily.map(
     (day, index) => ({
       dayOfTheWeek: daysWeek[index],
-      maxTemp: day.temp.min,
-      minTemp: day.temp.max
+      maxTemp: day.temp.max,
+      minTemp: day.temp.min
     }))
   return formatDailyWeather;
 }
