@@ -1,20 +1,23 @@
 import axios from 'axios';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice
+} from '@reduxjs/toolkit';
+
+import { WEATHER_API_CONTEXT } from '../Utils/globalConstants'
 
 const initialState = {
-  currentWeather: {},
+  weather: {},
   status: 'idle',
   error: null
 }
+const sliceName = 'weather'
 
 export const getCurrentLocationWeather = createAsyncThunk(
-  'weather/getCurrentLocationWeather',
-  async () => {
+  `${sliceName}/getCurrentLocationWeather`,
+  async ({ lat, lon }) => {
     // baseUrl can also be part of the env config if needed.
-    const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
-    //TODO: need to get the lat and lon form geolocation API
-    const lat = '30.2963579';
-    const lon = '-97.73907';
+    const baseUrl = `${process.env.REACT_APP_OPEN_WEATHER_MAP_API_BASE_URL}${WEATHER_API_CONTEXT}`
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
     const fullUrl = `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}`
     // Can create a request handler proxy to create axios instance at one place
@@ -30,12 +33,12 @@ export const getCurrentLocationWeather = createAsyncThunk(
 })
 
 export const weatherSlice = createSlice({
-  name: 'weather',
+  name: sliceName,
   initialState,
   reducers: {
     // TODO: data massaging for weather data can go in here
     // weatherDataAdded(state, action) {
-    //   state.currentWeather = action.payload;
+    //   state.weather = action.payload;
     // },
   },
   extraReducers: {
@@ -44,7 +47,7 @@ export const weatherSlice = createSlice({
     },
     [getCurrentLocationWeather.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      state.currentWeather = action.payload;
+      state.weather = action.payload;
     },
     [getCurrentLocationWeather.rejected]: (state, action) => {
       state.status = 'failed'
@@ -58,5 +61,5 @@ export const weatherSlice = createSlice({
 export default weatherSlice.reducer;
 
 // state getters
-export const getApiStatus = (state) => state.weather.status
-export const selectAllInfo = (state) => state.weather.currentWeather
+export const getWeatherApiStatus = (state) => state.weather.status
+export const selectAllInfo = (state) => state.weather.weather
