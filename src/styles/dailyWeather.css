@@ -1,0 +1,14 @@
+.icon-temp {
+  position: relative;
+}
+
+.cloud-icon {
+  font-size: 4rem !important;
+}
+
+.daily-temperature {
+  position: absolute;
+  top: 6px;
+  left: 75px;
+  font-size: 2rem;
+}

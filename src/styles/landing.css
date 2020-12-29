@@ -1,0 +1,22 @@
+.landing {
+  background: #fff;
+  border-radius: 5px;
+  height: 300px;
+  margin: 1rem;
+  width: 300px;
+  padding: 15px;
+  margin-top: 20%;
+}
+
+.circular-progress {
+  padding: 25px;
+  margin-left: 45%;
+}
+
+.daily-weather-wrapper {
+  border-bottom: 1px solid aqua;
+}
+
+.weekly-weather-wrapper {
+  padding: 10px 0px;
+}

@@ -1,4 +1,17 @@
 .App-header {
+  height: 50px;
+  padding-top: 10px;
   text-align: center;
   background-color: aqua;
+  font-size: large;
 }
+
+.App-wrapper {
+  height: 100vh;
+  background: url("../images/clouds.jpg") center center no-repeat;
+  background-size: cover;
+}
+
+@import './landing.css';
+@import './address.css';
+@import './dailyWeather.css';
