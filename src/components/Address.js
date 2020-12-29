@@ -6,11 +6,11 @@ import {
 } from '../redux/addressSlice'
 
 export const Address = () => {
-  const addressApiStatus = useSelector(getAddressApiStatus);
-  const { city, state } = useSelector(getCityAndState);
+  const addressApiStatus = useSelector(getAddressApiStatus)
+  const { city, state } = useSelector(getCityAndState)
   const dateObj = new Date()
-  const weekday = dateObj.toLocaleString("default", { weekday: "long" })
-  const time = dateObj.toLocaleTimeString([], {timeStyle: 'short'});
+  const weekday = dateObj.toLocaleString("default", { weekday: "long" }) // format is Monday
+  const time = dateObj.toLocaleTimeString([], {timeStyle: 'short'}) // format is HH:MM AM/PM
 
   return (
     <section className="address">

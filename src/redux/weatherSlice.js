@@ -4,7 +4,10 @@ import {
   createSlice
 } from '@reduxjs/toolkit';
 
-import { WEATHER_API_CONTEXT } from '../Utils/globalConstants'
+import {
+  WEATHER_API_CONTEXT,
+  COMMON_HEADERS
+} from '../Utils/globalConstants'
 
 const initialState = {
   weather: {},
@@ -22,12 +25,15 @@ export const getCurrentLocationWeather = createAsyncThunk(
     const fullUrl = `${baseUrl}?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     // Can create a request handler proxy to create axios instance at one place
     // and reuse it everywhere it is needed.
-    const response = await axios.get(fullUrl, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    return response.data
+    try {
+      const response = await axios.get(fullUrl, {
+        headers: COMMON_HEADERS
+      })
+      return response.data
+    } catch(err) {
+      console.log(err, 'error in open weather api')
+      return err
+    }
 })
 
 export const weatherSlice = createSlice({
