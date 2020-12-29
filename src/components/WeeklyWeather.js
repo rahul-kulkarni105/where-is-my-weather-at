@@ -26,9 +26,9 @@ export const WeeklyWeather = () => {
                   dayOfTheWeek,
                   maxTemp,
                   minTemp
-                }) => {
+                }, index) => {
                   return (
-                    <div className="weekday">
+                    <div className="weekday" key={`week-day-key${index}`}>
                       <p className="weekday-value">{dayOfTheWeek}</p>
                       <p className="weekday-value">{maxTemp}</p>
                       <p className="weekday-value">{minTemp}</p>
