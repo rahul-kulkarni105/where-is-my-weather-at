@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -19,8 +19,9 @@ import { Address } from './Address'
 
 export const Landing = () => {
   // defaults for latitude and longitude are my current location details.
-  const [lat, setLatitude] = useState(30.2963825)
-  const [lon, setLongitude] = useState(-97.73907609999999)
+  // TODO: Not Needed, can be removed
+  // const [lat, setLatitude] = useState()
+  // const [lon, setLongitude] = useState(-97.73907609999999)
   const dispatch = useDispatch()
   const weatherApiStatus = useSelector(getWeatherApiStatus)
   const addressApiStatus = useSelector(getAddressApiStatus)
@@ -35,20 +36,26 @@ export const Landing = () => {
             longitude: currentLongitude
           }
         } = position;
-        setLatitude(currentLatitude)
-        setLongitude(currentLongitude)
+        // TODO: Not Needed, can be removed
+        // setLatitude(currentLatitude)
+        // setLongitude(currentLongitude)
+        // Defaults for co-ordinates can go here if needed.
+        const coOrdinates = {
+          lat: currentLatitude,
+          lon: currentLongitude
+        };
         if (addressApiStatus === 'idle') {
-          dispatch(getCurrentLocationAddress({ lat, lon }))
+          dispatch(getCurrentLocationAddress(coOrdinates))
         }
         if (weatherApiStatus === 'idle') {
-          dispatch(getCurrentLocationWeather({ lat, lon }))
+          dispatch(getCurrentLocationWeather(coOrdinates))
         }
         if (allWeatherApiStatus === 'idle') {
-          dispatch(getWeatherInOneCall({ lat, lon }))
+          dispatch(getWeatherInOneCall(coOrdinates))
         }
       })
     }
-  }, [lat, lon, addressApiStatus, weatherApiStatus, allWeatherApiStatus, dispatch])
+  }, [addressApiStatus, weatherApiStatus, allWeatherApiStatus, dispatch])
 
   return (
     <div className="row landing-wrapper">
